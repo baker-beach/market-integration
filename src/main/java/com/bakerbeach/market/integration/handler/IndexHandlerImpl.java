@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bakerbeach.market.catalog.model.RawProduct;
-import com.bakerbeach.market.catalog.service.CatalogRawDataService;
+import com.bakerbeach.market.catalog.service.CatalogService;
 import com.bakerbeach.market.index.service.IndexService;
 import com.bakerbeach.market.integration.model.IntegrationContext;
 
@@ -28,7 +28,7 @@ public class IndexHandlerImpl extends AbstractHandler implements AggregationStra
 	private static Integer gtinChunkSize = DEFAULT_GTIN_CHUNK_SIZE;
 	
 	@Autowired
-	private CatalogRawDataService catalogService;
+	private CatalogService catalogService;
 	@Autowired
 	private IndexService indexService;
 
@@ -82,7 +82,7 @@ public class IndexHandlerImpl extends AbstractHandler implements AggregationStra
 			List<Currency> currencies = context.getCurrencies();
 			List<String> priceGroups = context.getPriceGroups();
 
-			List<RawProduct> products = catalogService.findByGtin(status, gtin);
+			List<RawProduct> products = catalogService.findRawByGtin(status, gtin);
 
 			indexService.index(products, shop, status, lastUpdate, locales, currencies, priceGroups);
 		} catch (Exception e) {
@@ -107,11 +107,11 @@ public class IndexHandlerImpl extends AbstractHandler implements AggregationStra
 		IndexHandlerImpl.gtinChunkSize = gtinChunkSize;
 	}
 	
-	public CatalogRawDataService getCatalogService() {
+	public CatalogService getCatalogService() {
 		return catalogService;
 	}
 
-	public void setCatalogService(CatalogRawDataService catalogService) {
+	public void setCatalogService(CatalogService catalogService) {
 		this.catalogService = catalogService;
 	}
 

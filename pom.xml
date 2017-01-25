@@ -57,16 +57,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.bakerbeach.market</groupId>
-			<artifactId>market-customer-api</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.bakerbeach.market</groupId>
-			<artifactId>market-order-api</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.bakerbeach.market</groupId>
 			<artifactId>market-index-api</artifactId>
 			<version>1.0.2</version>
 		</dependency>
@@ -99,6 +89,16 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-camel</artifactId>
 			<version>5.11.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bakerbeach.market</groupId>
+			<artifactId>market-customer</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bakerbeach.market</groupId>
+			<artifactId>market-order</artifactId>
+			<version>2.0.2</version>
 		</dependency>
 	</dependencies>
 </project>
