@@ -10,7 +10,7 @@
 	<artifactId>market-integration</artifactId>
 	<name>market-integration</name>
 	<packaging>jar</packaging>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<properties>
 		<org.springframework.version>4.1.4.RELEASE</org.springframework.version>
 		<commons.lang.version>3.0.1</commons.lang.version>
