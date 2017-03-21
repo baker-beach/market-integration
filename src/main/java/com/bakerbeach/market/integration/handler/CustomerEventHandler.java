@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.bakerbeach.market.com.api.ComConnector;
 import com.bakerbeach.market.com.api.ComConnectorException;
+import com.bakerbeach.market.com.api.DataMapKeys;
 import com.bakerbeach.market.com.api.MessageType;
 import com.bakerbeach.market.core.api.model.Customer;
 import com.bakerbeach.market.customer.api.service.CustomerService;
@@ -30,7 +31,7 @@ public class CustomerEventHandler extends AbstractHandler {
 			Map<String, Object> data = new HashMap<String, Object>();
 
 			if (payload.containsKey("shop_code")) {
-				data.put("shop_code", payload.get("shop_code"));
+				data.put(DataMapKeys.SHOP_CODE, payload.get("shop_code"));
 			} else {
 				throw new EventHandlerException("missing shop_code parameter for welcome mail");
 			}
@@ -39,7 +40,7 @@ public class CustomerEventHandler extends AbstractHandler {
 
 				Customer customer = customerService.findById((String) payload.get("customer_id"));
 				if (customer != null) {
-					data.put("customer", customer);
+					data.put(DataMapKeys.CUSTOMER, customer);
 				} else {
 					throw new EventHandlerException("customer not found with id " + (String) payload.get("customer_id"));
 				}
@@ -61,13 +62,13 @@ public class CustomerEventHandler extends AbstractHandler {
 			Map<String, Object> data = new HashMap<String, Object>();
 
 			if (payload.containsKey("shop_code")) {
-				data.put("shop_code", payload.get("shop_code"));
+				data.put(DataMapKeys.SHOP_CODE, payload.get("shop_code"));
 			} else {
 				throw new EventHandlerException("missing shop_code parameter for password mail");
 			}
 
 			if (payload.containsKey("password")) {
-				data.put("password", payload.get("password"));
+				data.put(DataMapKeys.PASSWORD, payload.get("password"));
 			} else {
 				throw new EventHandlerException("missing password parameter for password mail");
 			}
@@ -76,7 +77,7 @@ public class CustomerEventHandler extends AbstractHandler {
 
 				Customer customer = customerService.findById((String) payload.get("customer_id"));
 				if (customer != null) {
-					data.put("customer", customer);
+					data.put(DataMapKeys.CUSTOMER, customer);
 				} else {
 					throw new EventHandlerException("customer not found with id " + (String) payload.get("customer_id") + " for password mail");
 				}

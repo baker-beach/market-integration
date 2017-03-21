@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.bakerbeach.market.com.api.ComConnector;
 import com.bakerbeach.market.com.api.ComConnectorException;
+import com.bakerbeach.market.com.api.DataMapKeys;
 import com.bakerbeach.market.com.api.MessageType;
 import com.bakerbeach.market.core.api.model.Customer;
 import com.bakerbeach.market.core.api.model.Order;
@@ -34,16 +35,16 @@ public class OrderEventHandler extends AbstractHandler {
 			Map<String, Object> payload = (Map<String, Object>) getPayload(ex.getIn());
 			Map<String, Object> data = new HashMap<String, Object>();
 			if (payload.containsKey("shop_code")) {
-				data.put("shop_code", (String) payload.get("shop_code"));
+				data.put(DataMapKeys.SHOP_CODE, (String) payload.get("shop_code"));
 			} else {
 				throw new EventHandlerException("missing shop_code parameter for order mail");
 			}
 			if (payload.containsKey("order_id")) {
 				Order order = orderService.findOrderById((String) payload.get("order_id"));
 				if (order != null) {
-					data.put("order", order);
+					data.put(DataMapKeys.ORDER, order);
 					Customer customer = customerService.findById(order.getCustomerId());
-					data.put("customer", customer);
+					data.put(DataMapKeys.CUSTOMER, customer);
 				}else{
 					throw new EventHandlerException("order not found with id " + (String) payload.get("order_id") + " for order mail");
 				}
@@ -62,16 +63,16 @@ public class OrderEventHandler extends AbstractHandler {
 			Map<String, Object> payload = (Map<String, Object>) getPayload(ex.getIn());
 			Map<String, Object> data = new HashMap<String, Object>();
 			if (payload.containsKey("shop_code")) {
-				data.put("shop_code", payload.containsKey("shop_code"));
+				data.put(DataMapKeys.SHOP_CODE, payload.containsKey("shop_code"));
 			} else {
 				throw new EventHandlerException("missing shop_code parameter for cancel mail");
 			}
 			if (payload.containsKey("order_id")) {
 				Order order = orderService.findOrderById((String) payload.get("orderId"));
 				if (order != null) {
-					data.put("order", order);
+					data.put(DataMapKeys.ORDER, order);
 					Customer customer = customerService.findById(order.getCustomerId());
-					data.put("customer", customer);
+					data.put(DataMapKeys.CUSTOMER, customer);
 				}else{
 					throw new EventHandlerException("order not found with id " + (String) payload.get("order_id") + " for cancel mail");
 				}
@@ -90,16 +91,16 @@ public class OrderEventHandler extends AbstractHandler {
 			Map<String, Object> payload = (Map<String, Object>) getPayload(ex.getIn());
 			Map<String, Object> data = new HashMap<String, Object>();
 			if (payload.containsKey("shop_code")) {
-				data.put("shop_code", payload.containsKey("shop_code"));
+				data.put(DataMapKeys.SHOP_CODE, payload.containsKey("shop_code"));
 			} else {
 				throw new EventHandlerException("missing shop_code parameter for payment warning mail");
 			}
 			if (payload.containsKey("order_id")) {
 				Order order = orderService.findOrderById((String) payload.get("orderId"));
 				if (order != null) {
-					data.put("order", order);
+					data.put(DataMapKeys.ORDER, order);
 					Customer customer = customerService.findById(order.getCustomerId());
-					data.put("customer", customer);
+					data.put(DataMapKeys.CUSTOMER, customer);
 				}else{
 					throw new EventHandlerException("order not found with id " + (String) payload.get("order_id") + " for payment warning mail");
 				}
@@ -118,16 +119,16 @@ public class OrderEventHandler extends AbstractHandler {
 			Map<String, Object> payload = (Map<String, Object>) getPayload(ex.getIn());
 			Map<String, Object> data = new HashMap<String, Object>();
 			if (payload.containsKey("shop_code")) {
-				data.put("shop_code", payload.containsKey("shop_code"));
+				data.put(DataMapKeys.SHOP_CODE, payload.containsKey("shop_code"));
 			} else {
 				throw new EventHandlerException("missing shop_code parameter for payment mail");
 			}
 			if (payload.containsKey("order_id")) {
 				Order order = orderService.findOrderById((String) payload.get("orderId"));
 				if (order != null) {
-					data.put("order", order);
+					data.put(DataMapKeys.ORDER, order);
 					Customer customer = customerService.findById(order.getCustomerId());
-					data.put("customer", customer);
+					data.put(DataMapKeys.CUSTOMER, customer);
 				}else{
 					throw new EventHandlerException("order not found with id " + (String) payload.get("order_id") + " for payment mail");
 				}
