@@ -41,6 +41,7 @@ public class CustomerEventHandler extends AbstractHandler {
 				Customer customer = customerService.findById((String) payload.get("customer_id"));
 				if (customer != null) {
 					data.put(DataMapKeys.CUSTOMER, customer);
+					data.put(DataMapKeys.RECIPIENT, customer.getEmail());
 				} else {
 					throw new EventHandlerException("customer not found with id " + (String) payload.get("customer_id"));
 				}
@@ -78,6 +79,7 @@ public class CustomerEventHandler extends AbstractHandler {
 				Customer customer = customerService.findById((String) payload.get("customer_id"));
 				if (customer != null) {
 					data.put(DataMapKeys.CUSTOMER, customer);
+					data.put(DataMapKeys.RECIPIENT, customer.getEmail());
 				} else {
 					throw new EventHandlerException("customer not found with id " + (String) payload.get("customer_id") + " for password mail");
 				}
