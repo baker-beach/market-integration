@@ -47,7 +47,7 @@ public class OrderEventHandler extends AbstractHandler {
 				throw new EventHandlerException("missing shop_code parameter for order mail");
 			}
 			if (payload.containsKey("order_id")) {
-				Order order = orderService.findOrderById((String) payload.get("order_id"));
+				Order order = orderService.findOrderById((String) payload.get("shop_code"), (String) payload.get("order_id"));
 				if (order != null) {
 					data.put(DataMapKeys.ORDER, order);
 					Customer customer = customerService.findById(order.getCustomerId());
