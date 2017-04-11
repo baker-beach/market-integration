@@ -173,9 +173,9 @@ public class OrderEventHandler extends AbstractHandler {
 			throw new EventHandlerException("missing shop_code parameter for payment mail");
 		}
 
-		if (payload.containsKey("order_ids")) {
+		if (payload.containsKey("orders")) {
 			@SuppressWarnings("unchecked")
-			List<String> orderIdList = (List<String>) payload.get("order_ids");
+			List<String> orderIdList = (List<String>) payload.get("orders");
 
 			for (String orderId : orderIdList) {
 				Order order = orderService.findOrderById(orderId);
@@ -217,6 +217,10 @@ public class OrderEventHandler extends AbstractHandler {
 								}
 							}
 						}
+					}
+					else if(oi.getQualifier().equals("SHIPPING")){
+						if(params.get("delivery_cost") == null)
+							params.put("delivery_cost", oi.getTotalPrice());
 					}
 				}
 
