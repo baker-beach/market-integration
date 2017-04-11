@@ -218,6 +218,10 @@ public class OrderEventHandler extends AbstractHandler {
 							}
 						}
 					}
+					else if(oi.getQualifier().equals("SHIPPING")){
+						if(params.get("delivery_cost") == null)
+							params.put("delivery_cost", oi.getTotalPrice());
+					}
 				}
 
 			}
