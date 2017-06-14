@@ -18,12 +18,12 @@ import com.bakerbeach.market.com.api.ComConnectorException;
 import com.bakerbeach.market.com.api.DataMapKeys;
 import com.bakerbeach.market.com.api.MessageType;
 import com.bakerbeach.market.core.api.model.Customer;
-import com.bakerbeach.market.core.api.model.Order;
-import com.bakerbeach.market.core.api.model.OrderItem;
-import com.bakerbeach.market.core.api.model.OrderItem.OrderItemComponent;
-import com.bakerbeach.market.core.api.model.OrderItem.OrderItemOption;
 import com.bakerbeach.market.customer.api.service.CustomerService;
 import com.bakerbeach.market.customer.api.service.CustomerServiceException;
+import com.bakerbeach.market.order.api.model.Order;
+import com.bakerbeach.market.order.api.model.OrderItem;
+import com.bakerbeach.market.order.api.model.OrderItem.OrderItemComponent;
+import com.bakerbeach.market.order.api.model.OrderItem.OrderItemOption;
 import com.bakerbeach.market.order.api.service.OrderService;
 import com.bakerbeach.market.order.api.service.OrderServiceException;
 
