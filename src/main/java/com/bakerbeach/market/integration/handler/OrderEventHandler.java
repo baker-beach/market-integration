@@ -65,6 +65,36 @@ public class OrderEventHandler extends AbstractHandler {
 			log.error(ExceptionUtils.getFullStackTrace(e));
 		}
 	}
+	
+	public void dispatched(Exchange ex) {
+		try {
+			@SuppressWarnings("unchecked")
+			Map<String, Object> payload = (Map<String, Object>) getPayload(ex.getIn());
+			Map<String, Object> data = new HashMap<String, Object>();
+			if (payload.containsKey("shop_code")) {
+				data.put(DataMapKeys.SHOP_CODE, (String) payload.get("shop_code"));
+			} else {
+				throw new EventHandlerException("missing shop_code parameter for order mail");
+			}
+			if (payload.containsKey("order_id")) {
+				Order order = orderService.findOrderById((String) payload.get("shop_code"), (String) payload.get("order_id"));
+				if (order != null) {
+					data.put(DataMapKeys.ORDER, order);
+					Customer customer = customerService.findById(order.getCustomerId());
+					data.put(DataMapKeys.CUSTOMER, customer);
+					data.put(DataMapKeys.RECIPIENT, customer.getEmail());
+				} else {
+					throw new EventHandlerException(
+							"order not found with id " + (String) payload.get("order_id") + " for order mail");
+				}
+			} else {
+				throw new EventHandlerException("missing order_id parameter for order mail");
+			}
+			comConnector.generateMessageAndSend(MessageType.DISPATCHED, data);
+		} catch (EventHandlerException | ComConnectorException | CustomerServiceException | OrderServiceException e) {
+			log.error(ExceptionUtils.getFullStackTrace(e));
+		}
+	}
 
 	public void cancel(Exchange ex) {
 		try {
